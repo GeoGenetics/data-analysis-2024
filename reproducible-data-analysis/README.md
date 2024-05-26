@@ -4,12 +4,14 @@ Welcome to the GitHub repository for Reproducible data analysis and workflows mo
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Tasks](#tasks)
-- [Wiki](#wiki)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+- [Fundamentals in Computational Analysis of Large-Scale Datasets](#fundamentals-in-computational-analysis-of-large-scale-datasets)
+  - [Table of Contents](#table-of-contents)
+    - [Overview](#overview)
+    - [Tasks](#tasks)
+    - [Wiki](#wiki)
+    - [Getting Started](#getting-started)
+    - [Contributing](#contributing)
+    - [License](#license)
 
 ### Overview
 
@@ -21,14 +23,14 @@ The tasks for each day are located in their respective directories, `Day1` and `
 
 ### Wiki
 
-The [wiki](https://github.com/GeoGenetics/data-analysis-2024/reproducible-data-analysis/wiki) contains detailed explanations of the concepts and techniques covered in the course, as well as examples and code snippets to help you understand and apply them. The wiki is organized into several sections, each corresponding to a topic covered in the course.
+The [wiki](https://github.com/GeoGenetics/data-analysis-2024/wiki) contains detailed explanations of the concepts and techniques covered in the course, as well as examples and code snippets to help you understand and apply them. The wiki is organized into several sections, each corresponding to a topic covered in the course.
 
 ### Getting Started
 
 To get started with the course, you'll need to have some basic knowledge of Python and data analysis. You'll also need to have Git installed on your computer. Once you have Git installed, you can clone this repository using the following command:
 
 ```bash
-git clone https://github.com/GeoGenetics/data-analysis-2024/reproducible-data-analysis.git
+git clone https://github.com/GeoGenetics/data-analysis-2024.git
 ```
 ### Contributing
 
