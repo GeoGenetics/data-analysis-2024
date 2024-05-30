@@ -32,7 +32,7 @@ library(tidyverse)
 # we will use a copy of the complete COVID-19 dataset from Our World in Data
 # https://github.com/owid/covid_data-19-data
 
-covid_data <- read_csv("https://github.com/GeoGenetics/data-analysis-2024/raw/main/data/owid-covid_data-data.csv")
+covid_data <- read_csv("https://github.com/GeoGenetics/data-analysis-2024/raw/main/data/owid-covid-data.csv")
 
 # First, let's have another look at the data
 covid_data
