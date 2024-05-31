@@ -358,14 +358,143 @@ one of the seminal papers in human population genetics, <a href="https://www.nat
 Geography within Europe”</a>, Novembre et al 2018 Nature. We need the
 following R packages for this exercise:</p>
 <pre class="r"><code>suppressMessages(library(tidyverse))
-suppressMessages(library(vegan))
-suppressMessages(library(maps))
+suppressMessages(library(vegan))</code></pre>
+<pre><code>## Warning: package &#39;vegan&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code>suppressMessages(library(maps))
 suppressMessages(library(geosphere))</code></pre>
 <p><br /> The dataset for reproducing the main figures is available from
 the <a href="https://github.com/NovembreLab/Novembre_etal_2008_misc">Novembre
 lab Github repository</a>. Here, we will use a minimally reformatted
-versions of the main PCA results table. There are two expected outcomes
-of this exercise:</p>
+versions of the main PCA results table.</p>
+<pre><code>## Rows: 1387 Columns: 7
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (3): sampleId, country, alabels
+## dbl (4): longitude, latitude, PC1, PC2
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## Rows: 41 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (2): country, color
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p><br /> First few lines of the dataset and color palette:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="30%" />
+<col width="10%" />
+<col width="13%" />
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">sampleId</th>
+<th align="left">country</th>
+<th align="left">alabels</th>
+<th align="right">longitude</th>
+<th align="right">latitude</th>
+<th align="right">PC1</th>
+<th align="right">PC2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ind_474</td>
+<td align="left">Croatia</td>
+<td align="left">HR</td>
+<td align="right">16.10000</td>
+<td align="right">45.32000</td>
+<td align="right">0.0111</td>
+<td align="right">-0.0460</td>
+</tr>
+<tr class="even">
+<td align="left">ind_660</td>
+<td align="left">Serbia and Montenegro</td>
+<td align="left">YG</td>
+<td align="right">20.61572</td>
+<td align="right">43.94949</td>
+<td align="right">-0.0300</td>
+<td align="right">-0.0443</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_1890</td>
+<td align="left">Czech Republic</td>
+<td align="left">CZ</td>
+<td align="right">15.37698</td>
+<td align="right">49.73661</td>
+<td align="right">0.0137</td>
+<td align="right">-0.0444</td>
+</tr>
+<tr class="even">
+<td align="left">ind_1923</td>
+<td align="left">Bosnia and Herzegovina</td>
+<td align="left">BA</td>
+<td align="right">17.86202</td>
+<td align="right">44.17588</td>
+<td align="right">0.0028</td>
+<td align="right">-0.0493</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_2083</td>
+<td align="left">Serbia and Montenegro</td>
+<td align="left">YG</td>
+<td align="right">20.61572</td>
+<td align="right">43.94949</td>
+<td align="right">-0.0031</td>
+<td align="right">-0.0416</td>
+</tr>
+<tr class="even">
+<td align="left">ind_2733</td>
+<td align="left">Serbia and Montenegro</td>
+<td align="left">YG</td>
+<td align="right">20.61572</td>
+<td align="right">43.94949</td>
+<td align="right">-0.0026</td>
+<td align="right">-0.0424</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">color</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Germany</td>
+<td align="left">gold1</td>
+</tr>
+<tr class="even">
+<td align="left">Netherlands</td>
+<td align="left">orange</td>
+</tr>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="left">tan3</td>
+</tr>
+<tr class="even">
+<td align="left">Luxembourg</td>
+<td align="left">yellow</td>
+</tr>
+<tr class="odd">
+<td align="left">Czech Republic</td>
+<td align="left">yellowgreen</td>
+</tr>
+<tr class="even">
+<td align="left">Hungary</td>
+<td align="left">gold2</td>
+</tr>
+</tbody>
+</table>
+<p>There are two expected outcomes of this exercise:</p>
 <p><strong>Recreate the PCA plot in Figure 1 starting from the PCA
 results table</strong></p>
 <p>To achieve this, you should carry out the following steps:</p>
@@ -391,7 +520,9 @@ object. A rotation matrix defined as</p></li>
 \end{bmatrix}\]</span>
 <p>where <span class="math inline">\(\theta\)</span> represents the
 rotation angle (in unit of radians) counterclockwise from the positive x
-axis.</p>
+axis. The rotation angle value can be extracted using the
+<code>atan2</code> function with matrix elements (M<sub>2,1</sub>,
+M<sub>1,1</sub>) as the two arguments</p>
 <ul>
 <li><p>Visualize the resulting rotated PCA using <code>ggplot2</code>.
 Start by trying to replicate the overall PCA plot of samples (using
@@ -405,16 +536,15 @@ processing. A possible solution would be rotating the coordinates of
 points at the ends of the original axes into the new coordinates by
 using the <code>predict()</code> function on the procrustes result
 object, and manually drawing the rotated axes using
-<code>geom_segment()</code></p></li>
+<code>geom_segment()</code>.</p></li>
 </ul>
 <p><br /> <strong>Predict the geographic location of samples from
 Austria from their PCA position</strong></p>
 <p>To achieve this, you can follow the linear regression approach from
 Novembre et al:</p>
 <ul>
-<li><p>Split your data into a test set containing only samples from the
-country of interest, and a training set of the remaining
-individuals.</p></li>
+<li><p>Split your data into a test set containing only samples from
+Austria, and a training set of the remaining individuals.</p></li>
 <li><p>Create two linear regression models, one for longitude and one
 for latitude as outcomes. For each model, use both rotated PC1 and PC2,
 as well as their interaction as predictors. The syntax for such a model
